@@ -3,6 +3,7 @@ on:
   workflow_dispatch:
     inputs:
       flavor:
+        type: choice
         description: 'Flavor to be executed'     
         required: true
         options: 
