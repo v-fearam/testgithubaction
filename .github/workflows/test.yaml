@@ -1,11 +1,13 @@
-name: Manual Execution with parameters
+name: Test 2
 on: 
   workflow_dispatch:
     inputs:
       flavor:
         description: 'Flavor to be executed'     
         required: true
-        default: 'Full'
+        options: 
+        - Full
+        - ITPro
 jobs:
   printInputs:
     runs-on: ubuntu-latest
