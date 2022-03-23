@@ -1,17 +1,19 @@
 name: Test 2
-on: 
+on:
   workflow_dispatch:
     inputs:
       flavor:
         type: choice
-        description: 'Flavor to be executed'     
+        description: "Flavor to be executed"
         required: true
-        options: 
-        - Full
-        - ITPro
+        options:
+          - Full
+          - ITPro
+          - Developers
 jobs:
   printInputs:
     runs-on: ubuntu-latest
+    if: ${{ github.event.inputs.flavor }} == Full
     steps:
-    - run: |
-        echo "flavor selected: ${{ github.event.inputs.flavor }}"
+      - run: |
+          echo "flavor selected: ${{ github.event.inputs.flavor }}"
