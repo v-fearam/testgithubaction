@@ -17,7 +17,11 @@ jobs:
       - name: Print Always
         run: |
           echo "flavor selected: ${{ github.event.inputs.flavor }}"
-      - name: Print Conditional      
+      - name: Print Conditional
         if: github.event.inputs.flavor == 'Full'
         run: |
           echo "flavor selected: ${{ github.event.inputs.flavor }}"
+      - name: HashiCorp - Setup Terraform
+        uses: hashicorp/setup-terraform@v1
+        with:
+          terraform_version: 1.0.11
