@@ -13,7 +13,7 @@ on:
 jobs:
   printInputs:
     runs-on: ubuntu-latest
-    if: github.event.inputs.flavor == Full
+    if: github.event.inputs.flavor == 'Full'
     steps:
       - run: |
           echo "flavor selected: ${{ github.event.inputs.flavor }}"
