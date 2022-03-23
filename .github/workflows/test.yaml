@@ -1,15 +1,15 @@
-name: Test 2
+name: Testing GitHub Action
 on:
   workflow_dispatch:
     inputs:
       flavor:
         type: choice
-        description: "Flavor to be executed"
+        description: 'Flavor to be executed'     
         required: true
-        options:
-          - Full
-          - ITPro
-          - Developers
+        options: 
+        - Full
+        - ITPro
+        - DevOps
       mechanism:
         type: choice
         description: 'Kind of deploy tool'     
@@ -18,6 +18,30 @@ on:
         - Arm
         - Bicep
         - Terraform
+      githubBranch:
+        description: 'git hub branch to take the scripts'     
+        required: true
+        default: 'master'       
+      resourceGroupName:
+        description: 'resource group where we will deploy'     
+        required: true
+        default: 'far-arcbox-test-rg'     
+      location:
+        description: 'location where we will deploy'     
+        required: true
+        default: 'westus2' 
+      logAnalyticsWorkspaceName:
+        description: 'Name of log Analytics Workspace'     
+        required: true
+        default: 'MyAnalyticsWorkspace123'  
+      myPublicIp:
+        description: 'your public ip to allow access by RDP'     
+        required: true
+        default: '45.191.156.175'
+      windowsAdminUsername:
+        description: 'Windows admin username'     
+        required: true
+        default: 'arcdemo'  
 jobs:
   printInputs:
     runs-on: ubuntu-latest
@@ -34,3 +58,14 @@ jobs:
         if: github.event.inputs.flavor == 'Terraform'
         with:
           terraform_version: 1.0.11
+      - name: Check input
+        run: |
+          echo "flavor selected: ${{ github.event.inputs.flavor }}"
+          echo "mechanism selected: ${{ github.event.inputs.mechanism }}" 
+          echo "githubAccount selected: ${GITHUB_REPOSITORY_OWNER}"
+          echo "githubBranch selected: ${{ github.event.inputs.githubBranch }}"
+          echo "resourceGroupName selected: ${{ github.event.inputs.resourceGroupName }}"
+          echo "location selected: ${{ github.event.inputs.location }}"
+          echo "logAnalyticsWorkspaceName selected: ${{ github.event.inputs.logAnalyticsWorkspaceName }}"
+          echo "myPublicIp selected: ${{ github.event.inputs.myPublicIp }}"
+          echo "windowsAdminUsername selected: ${{ github.event.inputs.windowsAdminUsername }}"          
