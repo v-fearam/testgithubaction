@@ -69,3 +69,11 @@ jobs:
           echo "logAnalyticsWorkspaceName selected: ${{ github.event.inputs.logAnalyticsWorkspaceName }}"
           echo "myPublicIp selected: ${{ github.event.inputs.myPublicIp }}"
           echo "windowsAdminUsername selected: ${{ github.event.inputs.windowsAdminUsername }}"          
+      - name: Upload File
+        run: |
+          echo "file content" > text.txt
+      - name: Upload File
+        uses: actions/upload-artifact@v3
+        with:
+          name: my-artifact
+          path: text.txt
